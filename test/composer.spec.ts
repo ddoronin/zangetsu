@@ -1,9 +1,22 @@
 import { expect } from 'chai';
 import { compose } from '../src/composer';
 
-describe('mutable', () => {
+describe('composer', () => {
     it('should create an object by default', () => {
         expect(compose({}).val()).to.eql({})
+    });
+
+    it('should mutate an object that is passed in', () => {
+        let o = { foo: 'foo' };
+        compose(o).append({ bar: 'Bar' });
+        expect(o).to.eql({ foo: 'foo', bar: 'Bar' });
+    });
+
+    it('should create a new object if {} is passed in', () => {
+        let o = { foo: 'foo' };
+        const res = compose({}).append(o).append({ bar: 'Bar' }).val();
+        expect(o).to.eql({ foo: 'foo' });
+        expect(res).to.eql({ foo: 'foo', bar: 'Bar' });
     });
 
     it('should append', () => {
