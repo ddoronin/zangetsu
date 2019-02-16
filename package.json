@@ -1,6 +1,6 @@
 {
   "name": "@ddoronin/super-object",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Object on drugs",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
