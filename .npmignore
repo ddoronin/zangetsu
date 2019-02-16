@@ -2,3 +2,7 @@
 node_modules
 src
 test
+.nyc_output
+coverage
+.coveralls.yml
+.travis.yml
