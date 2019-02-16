@@ -1,5 +1,5 @@
 {
-  "name": "super-object",
+  "name": "@ddoronin/super-object",
   "version": "0.0.1",
   "description": "Object on drugs",
   "main": "./lib/index.js",

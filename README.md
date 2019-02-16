@@ -1,7 +1,7 @@
 # super-object
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ddoronin/super-object/blob/master/LICENSE) 
-[![npm version](https://img.shields.io/npm/v/super-object.svg?style=flat)](https://www.npmjs.com/package/super-object) 
+[![npm version](https://img.shields.io/npm/v/@ddoronin/super-object.svg?style=flat)](https://www.npmjs.com/package/@ddoronin/super-object) 
 [![Build Status](https://travis-ci.org/ddoronin/super-object.svg?branch=master)](https://travis-ci.org/ddoronin/super-object) 
 [![Coverage Status](https://coveralls.io/repos/github/ddoronin/super-object/badge.svg?branch=master)](https://coveralls.io/github/ddoronin/super-object?branch=master)
 ```
