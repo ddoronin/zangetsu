@@ -11,14 +11,36 @@ $ yarn add @ddoronin/super-object
 > It's like `Object.assign()`, but even more.
 
 ## Usage
+```javascript
+import { compose } from 'super-object';
+...
+compose({})
+    .if(hasFoo && hasBar, {
+        foo: 'Foo',
+        bar: 'Bar'
+    }).elseif(hasFoo, {
+        foo: 'Foo'
+    }).elseif(hasBar, {
+        bar: 'Bar'
+    }).else({
+        noFooNoBar: 'NoFooNoBar'
+    }).val();
+```
 
-Suppose you compose a request to upload a file. You decided to set different content types based on a file extension and apply gzip if this a javascript or css file.
+| hasFoo \ hasBar | `true`                      | `false`                        |
+| --------------- | --------------------------- | ------------------------------ |
+| `true`          | `{ foo: 'Foo', bar: 'Bar' }`| `{ foo: 'Foo' }`               |
+| `false`         | `{ bar: 'Bar' }`            | `{ noFooNoBar: 'NoFooNoBar' }` |
+
+## Example
+
+Suppose you compose an HTTP request to upload a file. You decide to set content type based on a file extension and apply gzip for javascript and css files.
 
 ```javascript
 import { compose } from 'super-object';
 ...
-function createRequest(payload: any, fileExt: string) {
-    return api.compose({
+const createRequest = (payload: any, fileExt: string) => 
+    compose({
         body: { ...payload }
     }).if(fileExt === '.js', {
         contentType: 'text/javascript'
@@ -29,7 +51,6 @@ function createRequest(payload: any, fileExt: string) {
     }).if(fileExt === '.js' || fileExt === '.css', {
         encoding: 'gzip'
     }).val();
-}
 ```
 
 ## API
