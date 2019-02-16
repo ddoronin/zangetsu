@@ -10,7 +10,7 @@ export interface IComposer<A> {
     val(): A;
 }
 
-export function compose<A extends {}>(a: A = {} as any, lastCondition: boolean = null): IComposer<A> {
+export function compose<A extends {}>(a: A, lastCondition: boolean = null): IComposer<A> {
     return {
         append<B>(b: B): IComposer<A & B> {
             return compose(Object.assign(a, b));
