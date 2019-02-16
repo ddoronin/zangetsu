@@ -21,7 +21,10 @@ export function compose<A extends {}>(a: A = {} as any, lastCondition: boolean =
         },
 
         elseif<C>(condition: boolean, c: C): IComposer<A | C> {
-            return compose(lastCondition === false && condition === true? Object.assign(a, c): a, condition);
+            if (lastCondition === false) {
+                return compose(condition? Object.assign(a, c): a, condition);
+            }
+            return compose(a);
         },
 
         else<D>(d: D): IComposer<A | D> {
