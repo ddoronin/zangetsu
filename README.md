@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/ddoronin/super-object.svg?branch=master)](https://travis-ci.org/ddoronin/super-object) 
 [![Coverage Status](https://coveralls.io/repos/github/ddoronin/super-object/badge.svg?branch=master)](https://coveralls.io/github/ddoronin/super-object?branch=master)
 ```
-$ yarn add super-object
+$ yarn add @ddoronin/super-object
 ```
 ## Usage
 
