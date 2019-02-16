@@ -1,0 +1,52 @@
+{
+  "name": "super-object",
+  "version": "0.0.1",
+  "description": "Object on drugs",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "build": "tsc --declaration -p ./tsconfig.json --outDir lib/",
+    "coverage": "rm -rf coverage && nyc --reporter lcov mocha --require ts-node/register ./test/**/*.ts",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
+    "test:watch": "yarn test --reporter nyan -w --watch-extensions ts",
+    "test": "./node_modules/.bin/mocha --require ts-node/register ./test/**/*.spec.ts",
+    "pre-publish": "rm -rf lib && tsc --declaration -p ./tsconfig.json --outDir lib/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddoronin/super-object.git"
+  },
+  "author": "<doronindm@gmail.com>",
+  "license": "MIT",
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "include": [
+      "./src/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true
+  },
+  "bugs": {
+    "url": "https://github.com/ddoronin/super-object/issues"
+  },
+  "homepage": "https://github.com/ddoronin/super-object#readme",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.9.4",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.2",
+    "mocha": "^5.2.0",
+    "nyc": "^11.6.0",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3"
+  }
+}
