@@ -11,7 +11,7 @@ $ yarn add zanpakuto
 ```
 
 ## compose
-> It's like `Object.assign()` with brancking, but even more.
+> It's like `Object.assign()` and even more.
 
 ```javascript
 import { compose } from 'zanpakuto';
