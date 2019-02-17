@@ -31,7 +31,7 @@ compose({})
 
 | hasFoo \ `hasBar` | `true`                      | `false`                        |
 | --------------- | --------------------------- | ------------------------------ |
-| true          | { foo: 'Foo', `bar: 'Bar'` }| `{ foo: 'Foo' }`               |
+| true          | { foo: 'Foo', `bar: 'Bar'` }| { foo: 'Foo' }               |
 | false         | { `bar: 'Bar'` }            | { _noFooNoBar: 'NoFooNoBar'_ } |
 
 ## Example
@@ -57,7 +57,7 @@ const createRequest = (payload: any, fileExt: string) =>
 
 ## API
 
-| method |   description |
+| &nbsp;Method&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;| Description |
 | ------ | ------------- |
 | compose\<A extends {}>(a: A): IComposer\<A> | Creates a wrapper around a given object `a: A`. |
 | append\<B>(b: B): IComposer\<A \| B> | Appends a given object `b` to the context `A` |
