@@ -6,3 +6,4 @@ test
 coverage
 .coveralls.yml
 .travis.yml
+assets

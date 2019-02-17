@@ -1,4 +1,6 @@
-# zanpakuto
+# <img src="https://github.com/ddoronin/super-object/blob/master/assets/Zangetsu.jpg" alt="Zanpakutō 斬魄刀" height="80px"/>
+
+Zanpakutō (斬魄刀, Soul-Cutter Sword) is a Japanese sword of unique shape from [Bleach](https://en.wikipedia.org/wiki/Bleach_(TV_series)).
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ddoronin/super-object/blob/master/LICENSE) 
 [![npm version](https://img.shields.io/npm/v/@ddoronin/super-object.svg?style=flat)](https://www.npmjs.com/package/@ddoronin/super-object) 
@@ -9,7 +11,7 @@ $ yarn add zanpakuto
 ```
 
 ## compose
-> It's like `Object.assign()`, but even more.
+> It's like `Object.assign()` with brancking, but even more.
 
 ```javascript
 import { compose } from 'zanpakuto';
