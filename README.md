@@ -29,10 +29,10 @@ compose({})
     }).val();
 ```
 
-| hasFoo \ hasBar | `true`                      | `false`                        |
+| hasFoo \ `hasBar` | `true`                      | `false`                        |
 | --------------- | --------------------------- | ------------------------------ |
-| `true`          | `{ foo: 'Foo', bar: 'Bar' }`| `{ foo: 'Foo' }`               |
-| `false`         | `{ bar: 'Bar' }`            | `{ noFooNoBar: 'NoFooNoBar' }` |
+| true          | { foo: 'Foo', `bar: 'Bar'` }| `{ foo: 'Foo' }`               |
+| false         | { `bar: 'Bar'` }            | { _noFooNoBar: 'NoFooNoBar'_ } |
 
 ## Example
 
@@ -59,7 +59,7 @@ const createRequest = (payload: any, fileExt: string) =>
 
 | method |   description |
 | ------ | ------------- |
-| compose\<A extends {}>(a: A = {} as any): IComposer\<A> | Creates a wrapper around a given object `a: A` that is a context object. |
+| compose\<A extends {}>(a: A): IComposer\<A> | Creates a wrapper around a given object `a: A`. |
 | append\<B>(b: B): IComposer\<A \| B> | Appends a given object `b` to the context `A` |
 | if\<B>(condition: boolean, b: B): IComposer\<A \| B> | Appends a given object `b` to the context `A` if and only if the condition is satisfied. |
 | elseif\<C>(condition: boolean, c: C): IComposer\<A \| C> | Appends a given object `c` to the context `A` if and only if the condition is satisfied and all previous conditions were falsy. |
