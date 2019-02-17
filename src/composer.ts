@@ -1,11 +1,11 @@
 export interface IComposer<A> {
-    append<B>(b: B): IComposer<A | B>;
+    append<B>(b: B): IComposer<A & B>;
 
-    if<B>(condition: boolean, b: B): IComposer<A | B>;
+    if<B>(condition: boolean, b: B): IComposer<A | (A & B)>;
 
-    elseif<C>(condition: boolean, c: C): IComposer<A | C>
+    elseif<C>(condition: boolean, c: C): IComposer<A | (A & C)>
 
-    else<D>(d: D): IComposer<A | D>;
+    else<D>(d: D): IComposer<A | (A & D)>;
 
     val(): A;
 }
@@ -16,18 +16,18 @@ export function compose<A extends {}>(a: A, lastCondition: boolean = null): ICom
             return compose(Object.assign(a, b));
         },
 
-        if<B>(condition: boolean, b: B): IComposer<A | B> {
+        if<B>(condition: boolean, b: B): IComposer<A | (A & B)> {
             return compose(condition? Object.assign(a, b): a, condition);
         },
 
-        elseif<C>(condition: boolean, c: C): IComposer<A | C> {
+        elseif<C>(condition: boolean, c: C): IComposer<A | (A & C)> {
             if (lastCondition === false) {
                 return compose(condition? Object.assign(a, c): a, condition);
             }
             return compose(a);
         },
 
-        else<D>(d: D): IComposer<A | D> {
+        else<D>(d: D): IComposer<A | (A & D)> {
             return compose(lastCondition === false? Object.assign(a, d): a);
         },
 

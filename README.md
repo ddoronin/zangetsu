@@ -57,25 +57,25 @@ const createRequest = (payload: any, fileExt: string) =>
 
 ## API
 
-| Method| Description |
-| ------ | ------------- |
-| compose\<A extends {}>(a: A): IComposer\<A> | Creates a wrapper around a given object `a: A`. |
-| append\<B>(b: B): IComposer\<A \| B> | Appends a given object `b` to the context `A` |
-| if\<B>(condition: boolean, b: B): IComposer\<A \| B> | Appends a given object `b` to the context `A` if and only if the condition is satisfied. |
-| elseif\<C>(condition: boolean, c: C): IComposer\<A \| C> | Appends a given object `c` to the context `A` if and only if the condition is satisfied and all previous conditions were falsy. |
-| else\<D>(d: D): IComposer\<A \| D> | Appends a given object `d` to the context `A` if all previous conditions were falsy. |
-| val(): A | Simply returns the context object `A`. |
+| Method               | Description |
+| -------------------- | ------------- |
+| compose(a)           | Creates a wrapper for a given object `a`. |
+| append(b)            | Appends an object `b` to the context `a`. |
+| if(condition, b)     | Appends a given object `b` to the context `a if and only if the condition is satisfied. |
+| elseif(condition, c) | Appends a given object `c` to the context `a` if and only if the condition is satisfied and all previous conditions were falsy. |
+| else(d)              | Appends a given object `d` to the context `a` if all previous conditions were falsy. |
+| val()                | Simply returns the context object `a`. |
 
 ```typescript
 export interface IComposer<A> {
 
-    append<B>(b: B): IComposer<A | B>;
+    append<B>(b: B): IComposer<A & B>;
 
-    if<B>(condition: boolean, b: B): IComposer<A | B>;
+    if<B>(condition: boolean, b: B): IComposer<A | (A & B)>;
 
-    elseif<C>(condition: boolean, c: C): IComposer<A | C>
+    elseif<C>(condition: boolean, c: C): IComposer<A | (A & C)>
 
-    else<D>(d: D): IComposer<A | D>;
+    else<D>(d: D): IComposer<A | (A & D)>;
 
     val(): A;
 }
