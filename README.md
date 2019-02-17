@@ -1,18 +1,18 @@
-# super-object
+# zanpakuto
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ddoronin/super-object/blob/master/LICENSE) 
 [![npm version](https://img.shields.io/npm/v/@ddoronin/super-object.svg?style=flat)](https://www.npmjs.com/package/@ddoronin/super-object) 
 [![Build Status](https://travis-ci.org/ddoronin/super-object.svg?branch=master)](https://travis-ci.org/ddoronin/super-object) 
 [![Coverage Status](https://coveralls.io/repos/github/ddoronin/super-object/badge.svg?branch=master)](https://coveralls.io/github/ddoronin/super-object?branch=master)
 ```
-$ yarn add @ddoronin/super-object
+$ yarn add zanpakuto
 ```
 
+## compose
 > It's like `Object.assign()`, but even more.
 
-## Usage
 ```javascript
-import { compose } from 'super-object';
+import { compose } from 'zanpakuto';
 ...
 compose({})
     .if(hasFoo && hasBar, {
@@ -37,7 +37,7 @@ compose({})
 Suppose you compose an HTTP request to upload a file. You decide to set content type based on a file extension and apply gzip for javascript and css files.
 
 ```javascript
-import { compose } from 'super-object';
+import { compose } from 'zanpakuto';
 ...
 const createRequest = (payload: any, fileExt: string) => 
     compose({

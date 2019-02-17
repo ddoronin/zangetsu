@@ -1,5 +1,5 @@
 {
-  "name": "@ddoronin/super-object",
+  "name": "zanpakuto",
   "version": "0.0.7",
   "description": "Object on drugs",
   "main": "./lib/index.js",
