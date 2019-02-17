@@ -1,9 +1,9 @@
 # <img src="https://github.com/ddoronin/super-object/blob/master/assets/Zangetsu.jpg" alt="Zangetsu (斬月, Slaying Moon)" height="80px"/>
 
-Zangetsu (斬月, Slaying Moon) is a Japanese sword of unique shape from [Bleach](https://en.wikipedia.org/wiki/Bleach_(TV_series)).
+Zangetsu (斬月, Slaying Moon) is a sword used by the character Ichigo Kurosaki in the [Bleach series](https://en.wikipedia.org/wiki/Bleach_(TV_series)).
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/ddoronin/zangetsu/blob/master/LICENSE) 
-[![npm version](https://img.shields.io/npm/v/@ddoronin/zangetsu.svg?style=flat)](https://www.npmjs.com/package/@ddoronin/zangetsu) 
+[![npm version](https://img.shields.io/npm/v/zangetsu.svg?style=flat)](https://www.npmjs.com/package/zangetsu) 
 [![Build Status](https://travis-ci.org/ddoronin/zangetsu.svg?branch=master)](https://travis-ci.org/ddoronin/zangetsu) 
 [![Coverage Status](https://coveralls.io/repos/github/ddoronin/zangetsu/badge.svg?branch=master)](https://coveralls.io/github/ddoronin/zangetsu?branch=master)
 ```
