@@ -99,4 +99,49 @@ describe('composer', () => {
             whatever: 'Whatever'
         });
     });
+
+    it('should calculate projections with mutation', () => {
+        let fooBar = { 
+            foo: 'Foo' ,
+            bar: 'Bar',
+            whatever: 'Whatever'
+        };
+
+        compose(fooBar).$({
+            foo: true, 
+            bar: false, 
+            whatever: false
+        });
+
+        expect(fooBar).to.eql({
+            foo: 'Foo'
+        });
+    });
+
+    it('should calculate immutable projections', () => {
+        const fooBar = { 
+            foo: 'Foo' ,
+            bar: 'Bar',
+            whatever: 'Whatever'
+        };
+
+        expect(
+            compose({})
+                .append(fooBar)
+                .$({
+                    foo: false, 
+                    bar: true, 
+                    whatever: false
+                })
+                .val()
+        ).to.eql({
+            bar: 'Bar'
+        });
+
+        expect(fooBar).to.eql({
+            foo: 'Foo' ,
+            bar: 'Bar',
+            whatever: 'Whatever'
+        });
+    });
 });
