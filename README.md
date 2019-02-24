@@ -1,4 +1,4 @@
-# <img src="https://github.com/ddoronin/super-object/blob/master/assets/Zangetsu.jpg" alt="Zangetsu (斬月, Slaying Moon)" height="80px"/>
+# <img src="https://github.com/ddoronin/zangetsu/raw/master/assets/Zangetsu.jpg" alt="Zangetsu (斬月, Slaying Moon)" height="80px"/>
 
 Zangetsu (斬月, Slaying Moon) is a sword used by the character Ichigo Kurosaki in the [Bleach series](https://en.wikipedia.org/wiki/Bleach_(TV_series)).
 
@@ -10,22 +10,49 @@ Zangetsu (斬月, Slaying Moon) is a sword used by the character Ichigo Kurosaki
 $ yarn add zangetsu
 ```
 
-## compose
-> It's like `Object.assign()`, but even more.
+## Mutable & Immutable namespaces
+Use Immutable namespace if you need to create a completely new object (it's a use case for 99% of work). A new reference will be returned.
+Mutable - if you want to modify a given object. A reference to initial object will be returned. This could be confusing, so be careful and try to use Immutable version.
+
+Both namespaces share a single interface, so the signature of the methods should not be different.
 
 ```javascript
-import { compose } from 'zangetsu';
+import { Immutable } from 'zangetsu';
 ...
-compose({})
+Immutable
+    // Compose a new object.
+    .compose({
+        hello: 'World!'
+    })
+
+    // Extend this object with foo and bar
+    // if condition returns true.
     .if(hasFoo && hasBar, {
         foo: 'Foo',
         bar: 'Bar'
-    }).elseif(hasFoo, {
+    })
+
+    // Otherwise extend with foo only.
+    .elseif(hasFoo, {
         foo: 'Foo'
-    }).elseif(hasBar, {
+    })
+    
+    // Otherwise extend with bar only.
+    .elseif(hasBar, {
         bar: 'Bar'
-    }).else({
+    })
+    
+    // Otherwise...
+    .else({
         noFooNoBar: 'NoFooNoBar'
+    })
+    
+    // Build projections and show only true fields.
+    .$({
+        hello: false,
+        foo: true,
+        bar: true,
+        noFooNoBar: true
     }).val();
 ```
 
@@ -39,20 +66,21 @@ compose({})
 Suppose you compose an HTTP request to upload a file. You decide to set content type based on a file extension and apply gzip for javascript and css files.
 
 ```javascript
-import { compose } from 'zangetsu';
+import { Immutable } from 'zangetsu';
 ...
 const createRequest = (payload: any, fileExt: string) => 
-    compose({
-        body: { ...payload }
-    }).if(fileExt === '.js', {
-        contentType: 'text/javascript'
-    }).elseif(fileExt === '.css', {
-        contentType: 'text/css'
-    }).else({
-        contentType: 'application/octet-stream'
-    }).if(fileExt === '.js' || fileExt === '.css', {
-        encoding: 'gzip'
-    }).val();
+    Immutable
+        .compose({
+            body: { ...payload }
+        }).if(fileExt === '.js', {
+            contentType: 'text/javascript'
+        }).elseif(fileExt === '.css', {
+            contentType: 'text/css'
+        }).else({
+            contentType: 'application/octet-stream'
+        }).if(fileExt === '.js' || fileExt === '.css', {
+            encoding: 'gzip'
+        }).val();
 ```
 
 ## API
@@ -64,6 +92,7 @@ const createRequest = (payload: any, fileExt: string) =>
 | if(condition, b)     | Appends a given object `b` to the context `a if and only if the condition is satisfied. |
 | elseif(condition, c) | Appends a given object `c` to the context `a` if and only if the condition is satisfied and all previous conditions were falsy. |
 | else(d)              | Appends a given object `d` to the context `a` if all previous conditions were falsy. |
+| $(projection)        | Creates a projection of a context object `a` and returns only `true` fields. |
 | val()                | Simply returns the context object `a`. |
 
 ```typescript
@@ -76,6 +105,8 @@ export interface IComposer<A> {
     elseif<C>(condition: boolean, c: C): IComposer<A | (A & C)>
 
     else<D>(d: D): IComposer<A | (A & D)>;
+
+    $(projection: {[K in keyof A]: Boolean}): IComposer<{[K in keyof A]: A[K] }>;
 
     val(): A;
 }
