@@ -36,7 +36,7 @@ console.log(foo);       // will print out { foo: 'Foo', bar: 'Bar' }
 ```
 
 ## Declarative Syntax
-This library can extend objects with additional fields, remove fields with projection operator `$` and do it as a part of logical branching (`if`, `elseif` and `else`):
+This library can extend objects with additional fields, remove fields with projection operator `$` and do it as a part of logical branching using `if`, `elseif` and `else`:
 ```typescript
 import { Immutable } from 'zangetsu';
 ...
@@ -91,7 +91,7 @@ Immutable
 
 ## Real Life Example
 
-Suppose you need to compose an HTTP request to upload a file to a server. You decided to set content type based on a file extension and apply gzip for javascript and css files.
+Suppose you need to compose an HTTP request to upload a file to a server. You decided to set content type based on the file extension and apply gzip only if this is javascript or css.
 
 ```typescript
 import { Immutable } from 'zangetsu';
