@@ -30,7 +30,7 @@ import { Mutable } from 'zangetsu';
 let foo = {foo: 'Foo'};
 let bar = {bar: 'Bar'};
 let fooBar = Mutable.compose(foo).append(bar);
-assert(fooBar === foo); // fooBar and foo hold same reference. In other words foo is not { foo: 'Foo' } any more.
+assert(fooBar === foo); // same object
 
 console.log(foo);       // will print out { foo: 'Foo', bar: 'Bar' }
 ```
