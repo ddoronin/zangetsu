@@ -10,50 +10,78 @@ Zangetsu (斬月, Slaying Moon) is a sword used by the character Ichigo Kurosaki
 $ yarn add zangetsu
 ```
 
-## Mutable & Immutable namespaces
-Use Immutable namespace if you need to create a completely new object (it's a use case for 99% of work). A new reference will be returned.
-Mutable - if you want to modify a given object. A reference to initial object will be returned. This could be confusing, so be careful and try to use Immutable version.
+## Mutable & Immutable
+This library exposes two namespaces: `Mutable` and `Immutable`. 
+Use `Immutable` if you need to produce a new object.
+`Mutable` - to modify existing one.
 
-Both namespaces share a single interface, so the signature of the methods should not be different.
+```typescript
+import { Immutable } from 'zangetsu';
+...
+let foo = {foo: 'Foo'};
+let bar = {bar: 'Bar'};
+let fooBar = Immutable.compose(foo).append(bar);
+assert(fooBar !== foo); // different objects
+```
 
-```javascript
+```typescript
+import { Mutable } from 'zangetsu';
+...
+let foo = {foo: 'Foo'};
+let bar = {bar: 'Bar'};
+let fooBar = Mutable.compose(foo).append(bar);
+assert(fooBar === foo); // fooBar and foo hold same reference. In other words foo is not { foo: 'Foo' } any more.
+
+console.log(foo);       // will print out { foo: 'Foo', bar: 'Bar' }
+```
+
+## Declarative Syntax
+This library can extend objects with additional fields, remove fields with projection operator `$` and do it as a part of logical branching (`if`, `elseif` and `else`):
+```typescript
 import { Immutable } from 'zangetsu';
 ...
 Immutable
-    // Compose a new object.
+    // compose a new object
     .compose({
         hello: 'World!'
     })
 
-    // Extend this object with foo and bar
-    // if condition returns true.
+    // extend with another object
+    .append({
+        alice: 'Alice'
+    })
+
+    // extend if condition is satisfied
     .if(hasFoo && hasBar, {
         foo: 'Foo',
         bar: 'Bar'
     })
 
-    // Otherwise extend with foo only.
+    // or if another condition is satisfied
     .elseif(hasFoo, {
         foo: 'Foo'
     })
-    
-    // Otherwise extend with bar only.
+
+    // the chain could be long and it will stay readable
     .elseif(hasBar, {
         bar: 'Bar'
     })
-    
-    // Otherwise...
+
     .else({
         noFooNoBar: 'NoFooNoBar'
     })
     
-    // Build projections and show only true fields.
+    // build projections to filter fields
     .$({
         hello: false,
+        alice: false,
         foo: true,
         bar: true,
         noFooNoBar: true
-    }).val();
+    })
+
+    // return the result
+    .val();
 ```
 
 | hasFoo \ `hasBar` | `true`                      | `false`                        |
@@ -61,24 +89,24 @@ Immutable
 | true          | { foo: 'Foo', `bar: 'Bar'` }| { foo: 'Foo' }               |
 | false         | { `bar: 'Bar'` }            | { _noFooNoBar: 'NoFooNoBar'_ } |
 
-## Example
+## Real Life Example
 
-Suppose you compose an HTTP request to upload a file. You decide to set content type based on a file extension and apply gzip for javascript and css files.
+Suppose you need to compose an HTTP request to upload a file to a server. You decided to set content type based on a file extension and apply gzip for javascript and css files.
 
-```javascript
+```typescript
 import { Immutable } from 'zangetsu';
 ...
 const createRequest = (payload: any, fileExt: string) => 
     Immutable
         .compose({
             body: { ...payload }
-        }).if(fileExt === '.js', {
+        }).if(fileExt === 'js', {
             contentType: 'text/javascript'
-        }).elseif(fileExt === '.css', {
+        }).elseif(fileExt === 'css', {
             contentType: 'text/css'
         }).else({
             contentType: 'application/octet-stream'
-        }).if(fileExt === '.js' || fileExt === '.css', {
+        }).if(['js', 'css'].includes(fileExt), {
             encoding: 'gzip'
         }).val();
 ```
